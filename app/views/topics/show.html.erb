@@ -12,6 +12,20 @@
        <br />
        <%= @topic.description %>
     </p>
+    </br >
+    <div class="row">
+      <div class="col-md-8">
+        <div>
+          <h3>Comments</h3>
+          <%= render @topic.comments %>
+        </div>
+        <% if current_user %>
+          <%= render 'comments/form', comment: Comment.new, topic: @topic %>
+        <% end %>
+      </div>
+    </div>
+
+    <h4> Posts </h4>
     <% @topic.posts.each do |post| %>
       <div class="media">
         <%= render partial: 'votes/voter', locals: { post: post } %>
