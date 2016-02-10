@@ -14,6 +14,7 @@
     </p>
     <% @topic.posts.each do |post| %>
       <div class="media">
+        <%= post.rank %>
         <%= render partial: 'votes/voter', locals: { post: post } %>
         <div class="media-body">
           <h4 class="media-heading">
