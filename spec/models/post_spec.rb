@@ -12,6 +12,7 @@ RSpec.describe Post, type: :model do
 
   it { is_expected.to have_many(:comments) }
   it { is_expected.to have_many(:votes) }
+  it { is_expected.to have_many(:favorites) }
 
   it { should belong_to(:topic) }
   it { should belong_to(:user) }
@@ -86,5 +87,5 @@ RSpec.describe Post, type: :model do
      end
 
    end
-   
+
 end
