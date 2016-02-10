@@ -17,6 +17,9 @@ source 'https://rubygems.org'
  group :development, :test do
    gem 'rspec-rails', '~> 3.0'
    gem 'shoulda'
+   gem 'pry-rescue'
+   gem 'pry-byebug'
+   gem 'pry-rails'
  end
 
  # Use SCSS for stylesheets
