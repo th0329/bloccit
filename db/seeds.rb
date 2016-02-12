@@ -49,7 +49,7 @@ end
 
 # Create an admin user
  admin = User.create!(
-   name:     'Admin User',
+u-   name:     'Admin User',
    email:    'admin@example.com',
    password: 'helloworld',
    role:     'admin'
