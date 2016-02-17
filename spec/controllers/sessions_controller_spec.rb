@@ -3,7 +3,7 @@ include RandomData
 
 RSpec.describe SessionsController, type: :controller do
 
-  let(:my_user) { build(:user) }
+  let(:my_user) { create(:user) }
 
    describe "GET new" do
 

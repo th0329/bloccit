@@ -3,9 +3,9 @@ include RandomData
 
 RSpec.describe Vote, type: :model do
 
-  let(:topic) { build(:topic) }
-  let(:user) { build(:user) }
-  let(:post) { build(:post) }
+  let(:topic) { create(:topic) }
+  let(:user) { create(:user) }
+  let(:post) { create(:post) }
   let(:vote) { Vote.create!(value: 1, post: post, user: user) }
 
   it { is_expected.to belong_to(:post) }
