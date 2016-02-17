@@ -1,8 +1,9 @@
 require 'rails_helper'
+include RandomData
 
 RSpec.describe SessionsController, type: :controller do
 
-  let(:my_user) { User.create!(name: "Blochead", email: "blochead@bloc.io", password: "password") }
+  let(:my_user) { build(:user) }
 
    describe "GET new" do
 
@@ -61,7 +62,7 @@ RSpec.describe SessionsController, type: :controller do
        delete :destroy, id: my_user.id
        expect(flash[:notice]).to be_present
      end
-     
+
    end
 
 end
