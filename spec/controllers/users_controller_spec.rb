@@ -1,4 +1,5 @@
 require 'rails_helper'
+include SessionsHelper
 
 RSpec.describe UsersController, type: :controller do
 
@@ -86,6 +87,40 @@ RSpec.describe UsersController, type: :controller do
         it "assigns factory_user to @user" do
           get :show, {id: factory_user.id}
           expect(assigns(:user)).to eq(factory_user)
+        end
+
+      end
+
+      describe "users #show view" do
+        let(:my_topic) { create(:topic) }
+        let(:user_post) { create(:post, topic: my_topic, user: user) }
+        let(:user) {create(:user)}
+        let(:user_vote) {Vote.create!(value: 1, post: post, user: user)}
+        let(:comment) {create(:comment)}
+        let(:known_user) { build(:user, email: "blochead@bloc.io") }
+
+        it "returns http success" do
+          get :show, {id: user.id}
+          expect(response).to have_http_status(:success)
+        end
+
+        it "displays list of posts the user has favorited" do
+          expect(user.favorites.find_by_post_id(user_post.id)).not_to be_nil
+        end
+
+        it "displays the users Gravatar" do
+          expected_gravatar = "http://gravatar.com/avatar/bb6d1172212c180cfbdb7039129d7b03.png?s=48"
+          expect(known_user.avatar_url(48)).to eq(expected_gravatar)
+        end
+
+        it "displays the number of votes" do
+          votes = user_post.votes.count
+          expect(user_post.votes.count).to eq(votes)
+        end
+
+        it "displays the number of comments" do
+          comments = user_post.comments.count
+          expect(user_post.comments.count).to eq(comments)
         end
 
       end

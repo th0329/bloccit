@@ -9,18 +9,23 @@
          </div>
        <% end %>
        <div class="media-body">
+         <% if @user.posts.count <= 0 && @user.comments.count <= 0 %>
+            <%= @user.name %> has not submitted any posts or comments.
+          <% else %>
          <h2 class="media-heading"><%= @user.name %></h2>
          <small>
            <%= pluralize(@user.posts.count, 'post') %>,
            <%= pluralize(@user.comments.count, 'comment') %>
          </small>
        </div>
+       <% end %>
      </div>
    </div>
  </div>
 
+<div class="col-md-8">
  <h2>Posts</h2>
  <%= render @user.posts %>
-
  <h2>Comments</h2>
  <%= render @user.comments %>
+</div>
