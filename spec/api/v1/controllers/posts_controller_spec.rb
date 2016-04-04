@@ -17,7 +17,7 @@ require 'rails_helper'
      end
 
      it "DELETE destroy returns http unauthenticated" do
-       delete :destroy, id: my_post.id
+       delete :destroy, topic_id: my_topic, id: my_post.id
        expect(response).to have_http_status(401)
      end
 
@@ -31,17 +31,17 @@ require 'rails_helper'
 
 
      it "PUT update returns http forbidden" do
-       put :update, id: my_post.id, post: {title: "Post Name", body: "Post Description"}
+       put :update, topic_id: my_topic, id: my_post.id, post: {title: "Post Name", body: "Post Description"}
        expect(response).to have_http_status(403)
      end
 
      it "POST create returns http forbidden" do
-       post :create, topic: {name: "Topic Name", description: "Topic Description"}
+       post :create, topic_id: my_topic, topic: {name: "Topic Name", description: "Topic Description"}
        expect(response).to have_http_status(403)
      end
 
      it "DELETE destroy returns http forbidden" do
-       delete :destroy, id: my_post.id
+       delete :destroy, topic_id: my_topic, id: my_post.id
        expect(response).to have_http_status(403)
      end
 
@@ -58,7 +58,7 @@ require 'rails_helper'
 
      describe "PUT update" do
 
-       before { put :update, id: my_post.id, post: {title: @new_post.title, body: @new_post.body}, topic: my_topic, user: my_user }
+       before { put :update, topic_id: my_topic, id: my_post.id, post: {title: @new_post.title, body: @new_post.body}, topic: my_topic, user: my_user }
 
        it "returns http success" do
          expect(response).to have_http_status(:success)
@@ -76,7 +76,8 @@ require 'rails_helper'
      end
 
      describe "POST create" do
-       before { post :create, topic: {name: @new_topic.name, description: @new_topic.description} }
+
+#       before { post :create, topic_id: my_topic.id, post: {title: RandomData.random_sentence, body: RandomData.random_paragraph} }
 
        it "returns http success" do
          expect(response).to have_http_status(:success)
@@ -96,7 +97,7 @@ require 'rails_helper'
 
      describe "DELETE destroy" do
 
-       before { delete :destroy, id: my_post.id }
+       before { delete :destroy, topic_id: my_topic, id: my_post.id }
 
        it "returns http success" do
          expect(response).to have_http_status(:success)

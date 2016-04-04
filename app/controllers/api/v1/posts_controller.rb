@@ -1,7 +1,7 @@
 class Api::V1::PostsController < Api::V1::BaseController
 
-  #  before_action :authenticate_user, except: [:index, :show]
-  #  before_action :authorize_user, except: [:index, :show]
+    before_action :authenticate_user, except: [:index, :show]
+    before_action :authorize_user, except: [:index, :show]
 
    def index
 
@@ -30,9 +30,9 @@ class Api::V1::PostsController < Api::V1::BaseController
    end
 
    def create
-     binding.pry
-     post = Post.new(topic_params)
 
+     post = Post.new(post_params)
+binding.pry
      if post.valid?
        post.save!
        render json: post.to_json, status: 201
