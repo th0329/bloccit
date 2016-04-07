@@ -1,0 +1,26 @@
+<%= form_for [topic, sponsoredpost] do |f| %>
+<% if sponsoredpost.errors.any? %>
+<div class="alert alert-danger">
+  <h4><%= pluralize(sponsoredpost.errors.count, "error") %>.</h4>
+  <ul>
+    <% sponsoredpost.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+
+<%= form_group_tag(sponsoredpost.errors[:title]) do %>
+<%= f.label :title %>
+<%= f.text_field :title, class: 'form-control', placeholder: "Enter Sponsored Post title" %>
+<% end %>
+
+<%= form_group_tag(sponsoredpost.errors[:body]) do %>
+<%= f.label :body %>
+<%= f.text_area :body, rows: 8, class: 'form-control', placeholder: "Enter Sponsored Post body" %>
+<% end %>
+
+<div class="form-group">
+    <%= f.submit "Save", class: 'btn btn-success' %>
+</div>
+<% end %>
