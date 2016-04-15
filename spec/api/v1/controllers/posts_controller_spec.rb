@@ -77,7 +77,12 @@ require 'rails_helper'
 
      describe "POST create" do
 
-#       before { post :create, topic_id: my_topic.id, post: {title: RandomData.random_sentence, body: RandomData.random_paragraph} }
+      before { post :create, topic_id: my_topic.id,
+        post: {
+          topic_id: my_topic.id, user_id: my_user.id,
+          title: @new_post.title, body: @new_post.body
+        }
+      }
 
        it "returns http success" do
          expect(response).to have_http_status(:success)
