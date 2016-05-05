@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   resources :labels, only: [:show]
 
   resources :topics do
-    resources :posts, except: [:index]
+    # resources :posts, except: [:index]
   end
 
   resources :posts, only: [] do
@@ -25,7 +25,10 @@ resources :sessions, only:[:new, :create, :destroy]
   namespace :api do
     namespace :v1 do
       resources :users, only: [:index, :show, :create, :update]
-      resources :topics, except: [:edit, :new]
+      resources :topics do
+        resources :posts do
+        end
+      end
     end
   end
 
